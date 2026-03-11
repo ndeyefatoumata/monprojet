@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do List Moderne</title>
+    <style>
+        /* Style Global */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Bouton Ajouter */
+        .btn-add {
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-add:hover {
+            background-color: #1557b0;
+        }
+
+        /* Table Style */
+        table {
+            width: 90%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden; /* Pour arrondir les coins de la table */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background-color: #1a73e8;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #f8fbff;
+        }
+
+        /* Style des liens d'action */
+        .btn-delete {
+            color: #d93025;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border: 1px solid #d93025;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .btn-delete:hover {
+            background-color: #d93025;
+            color: white;
+        }
+
+        /* Badge de statut (optionnel si tu veux de la couleur selon le texte) */
+        .status {
+            font-size: 0.9em;
+            padding: 4px 8px;
+            border-radius: 20px;
+            background: #e8f0fe;
+            color: #1967d2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Ma Liste de Tâches</h1>
+
+<a th:href="@{/new}" class="btn-add">+ Ajouter une tâche</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Statut</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.id}" style="color: #888; font-size: 0.8em;"></td>
+        <td th:text="${task.titre}" style="font-weight: 600;"></td>
+        <td th:text="${task.description}"></td>
+        <td>
+            <span class="status" th:text="${task.statut}"></span>
+        </td>
+        <td>
+            <a th:href="@{/delete/{id}(id=${task.id})}"
+               class="btn-delete"
+               onclick="return confirm('Supprimer cette tâche ?')">Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

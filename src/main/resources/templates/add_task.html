@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ajouter tâche</title>
+</head>
+<body>
+
+<h2>Nouvelle tâche</h2>
+
+<form action="/save" method="post">
+
+    <label>Titre :</label>
+    <input type="text" name="titre">
+
+    <br><br>
+
+    <label>Description :</label>
+    <input type="text" name="description">
+
+    <br><br>
+
+    <label>Statut :</label>
+    <input type="text" name="statut">
+
+    <br><br>
+
+    <button type="submit">Enregistrer</button>
+
+</form>
+
+</body>
+</html>
